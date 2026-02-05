@@ -34,19 +34,7 @@ pnpm run start
 
 ## Backend Folder Structure
 
-├── controllers
-│   └── videoapi.js          # API routes for listing & search
-├── models
-│   └── video.js             # MongoDB video schema
-├── services
-│   └── videoFetch.js        # Background YouTube polling service
-├── utils
-│   └── dbConnect.js         # MongoDB connection helper
-├── .env.example
-├── .gitignore
-├── app.js                   # Express entry point
-├── package.json
-└── pnpm-lock.yaml
+![Backend](./public/Backend-folder-structure.png)
 
 
 ### Backend Highlights
@@ -59,26 +47,9 @@ Duplicate prevention using unique video IDs
 
 ## Frontend Folder Structure
 
-├── public
-├── src
-│   ├── assets
-│   ├── components
-│   │   ├── Loaders.jsx      # Skeleton loaders
-│   │   ├── Pagination.jsx   # Pagination / Load More UI
-│   │   ├── Searching.jsx    # Search component
-│   │   └── Videos.jsx       # Video card UI
-│   ├── services
-│   │   └── videoapi.js      # Backend API integration
-│   ├── App.jsx
-│   ├── main.jsx
-│   └── index.css
-├── index.html
-├── package.json
-└── vite.config.js
+![Frontend](./public/Frontend-folder-structure.png)
 
 ## Frontend Highlights
-
-
 
 Built with React + Vite
 Connects to backend APIs
