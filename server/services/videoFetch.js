@@ -41,6 +41,21 @@ export async function fetchLatestVideos() {
 
       if (!videoId || !snippet) continue;
 
+      // const doc = {
+      //   videoId,
+      //   title: snippet.title,
+      //   description: snippet.description,
+      //   publishedAt: new Date(snippet.publishedAt),
+      //   thumbnails: {
+      //     default: snippet.thumbnails?.default?.url || "",
+      //     medium: snippet.thumbnails?.medium?.url || "",
+      //     high: snippet.thumbnails?.high?.url || "",
+      //     url: `https://www.youtube.com/watch?v=${videoId}`,
+      //       fetchedAt: new Date()
+      //   },
+      //   channelTitle: snippet.channelTitle || "",
+      // };
+
       const doc = {
         videoId,
         title: snippet.title,
@@ -52,6 +67,7 @@ export async function fetchLatestVideos() {
           high: snippet.thumbnails?.high?.url || "",
         },
         channelTitle: snippet.channelTitle || "",
+        url: `https://www.youtube.com/watch?v=${videoId}`, // Adding URL field to the document
       };
 
       // upsert = insert if not exists, else update
@@ -59,12 +75,11 @@ export async function fetchLatestVideos() {
     }
 
     console.log(
-      `[YouTube Poll] Stored/Updated ${items.length} videos for "${query}"`);
-    }
-  
-    catch (error) {
-    const status = err?.response?.status;
-    const msg = err?.response?.data?.error?.message || err.message;
+      `[YouTube Poll] Stored/Updated ${items.length} videos for "${query}"`,
+    );
+  } catch (error) {
+    const status = error?.response?.status;
+    const msg = error?.response?.data?.error?.message || err.message;
     console.log("[YouTube Poll] Error:", status, msg);
   } finally {
     isfetching = false;

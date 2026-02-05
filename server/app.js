@@ -1,7 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import './utils/dbConnect.js';
-import startfetcingVideos from './controllers/videoFetch.js';
+import startfetcingVideos from './services/videoFetch.js';
+import videoRoutes from './controllers/videoapi.js';
 
 dotenv.config();
 
@@ -20,9 +21,9 @@ app.get('/', (req, res) => {
     }
 })
 
-startfetcingVideos(10000); // Fetch videos every 10 seconds
+startfetcingVideos(10000);  // Fetch videos every 10 seconds
 
-
+app.use('/api', videoRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port http://localhost:${PORT}`);

@@ -1,49 +1,62 @@
 import mongoose from "mongoose";
 
-
 const videoSchema = new mongoose.Schema(
-  {
-    videoId: {
-      type: String,
-      required: true,
-      unique: true,
-      index: true
-    },
+      {
+            videoId: {
+                  type: String,
+                  required: true,
+                  unique: true,
+                  index: true,
+            },
 
-    title: {
-      type: String,
-      required: true
-    },
+            title: {
+                  type: String,
+                  required: true,
+                  trim: true,
+            },
 
-    description: {
-      type: String
-    },
+            description: {
+                  type: String,
+                  default: "",
+                  trim: true,
+            },
 
-    publishedAt: {
-      type: Date,
-      required: true,
-      index: true
-    },
+            publishedAt: {
+                  type: Date,
+                  required: true,
+                  index: true,
+            },
 
-    thumbnails: {
-      default: String,
-      medium: String,
-      high: String
-    },
+            thumbnails: {
+                  type: Object,
+                  default: {},
+            },
 
-    channelTitle: String
-  },
-  { timestamps: true }
+            channelTitle: {
+                  type: String,
+                  default: "",
+            },
+
+            tags: {
+                  type: [String],
+                  default: [],
+            },
+
+            url: {
+                  type: String,
+                  default: "",
+            },
+
+            fetchedAt: {
+                  type: Date,
+                  default: Date.now,
+            },
+      },
+      { timestamps: true },
 );
 
-/* Create text index for title and description for full-text search */
+videoSchema.index({ title: "text", description: "text" }); // Creating a text index for easy and partial searches
 
-videoSchema.index({
-  title: "text",
-  description: "text"
-});
+const videoModel = mongoose.model("Video", videoSchema);
 
-
-const VideoModel = mongoose.model("Video", videoSchema);
-
-export default VideoModel;
+export default videoModel;
