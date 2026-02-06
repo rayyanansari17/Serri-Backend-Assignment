@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     }
 })
 
-startfetcingVideos(10000);  // Fetch videos every 10 seconds
+startfetcingVideos(1800000);  // Fetch videos every 30 minutes
 
 app.use('/api', videoRoutes);
 

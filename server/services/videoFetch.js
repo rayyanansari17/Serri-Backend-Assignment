@@ -86,7 +86,7 @@ export async function fetchLatestVideos() {
   }
 }
 
-function startVideoFetchInterval(intervalMs = 10000) {
+function startVideoFetchInterval(intervalMs = 1800000) {   // Default to 30 minutes
   fetchLatestVideos(); // Initial fetch
   setInterval(fetchLatestVideos, intervalMs);
 }
